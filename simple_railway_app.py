@@ -16,6 +16,10 @@ def search_business_and_reviews(business_name, location):
     if not api_key:
         return None, "API key not configured"
     
+    # Debug: Check API key format
+    if len(api_key) < 20:
+        return None, f"API key appears to be invalid (too short: {len(api_key)} characters)"
+    
     try:
         # Initialize Google Maps client
         gmaps = googlemaps.Client(key=api_key)
@@ -371,6 +375,17 @@ def health_check():
 def ping():
     """Simple ping endpoint for Railway health checks"""
     return "pong", 200
+
+@app.route('/debug')
+def debug():
+    """Debug endpoint to check API key status"""
+    api_key = os.environ.get('GOOGLE_API_KEY')
+    return jsonify({
+        "api_key_exists": bool(api_key),
+        "api_key_length": len(api_key) if api_key else 0,
+        "api_key_preview": api_key[:10] + "..." if api_key and len(api_key) > 10 else "None",
+        "environment_variables": {k: v for k, v in os.environ.items() if 'GOOGLE' in k or 'API' in k}
+    })
 
 if __name__ == '__main__':
     print("🚂 Starting Google Review Analyzer on Railway...")
