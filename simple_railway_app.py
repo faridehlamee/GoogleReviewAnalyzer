@@ -6,8 +6,61 @@ import requests
 import json
 import urllib.parse
 from flask import Flask, request, jsonify
+import googlemaps
 
 app = Flask(__name__)
+
+def search_business_and_reviews(business_name, location):
+    """Search for a business and get its reviews using Google Places API"""
+    api_key = os.environ.get('GOOGLE_API_KEY')
+    if not api_key:
+        return None, "API key not configured"
+    
+    try:
+        # Initialize Google Maps client
+        gmaps = googlemaps.Client(key=api_key)
+        
+        # Search for the business
+        search_query = f"{business_name} {location}"
+        places_result = gmaps.places(query=search_query)
+        
+        if not places_result.get('results'):
+            return None, f"No businesses found for '{business_name}' in '{location}'"
+        
+        # Get the first result
+        place = places_result['results'][0]
+        place_id = place['place_id']
+        place_name = place['name']
+        place_address = place.get('formatted_address', 'Address not available')
+        
+        # Get place details including reviews
+        place_details = gmaps.place(
+            place_id=place_id,
+            fields=['name', 'formatted_address', 'rating', 'reviews', 'user_ratings_total']
+        )
+        
+        if 'result' not in place_details:
+            return None, "Could not get business details"
+        
+        result = place_details['result']
+        reviews = result.get('reviews', [])
+        
+        # Filter bad reviews (< 4 stars)
+        bad_reviews = [review for review in reviews if review.get('rating', 5) < 4]
+        
+        return {
+            'place_name': place_name,
+            'place_address': place_address,
+            'place_id': place_id,
+            'total_rating': result.get('rating', 'N/A'),
+            'total_reviews': result.get('user_ratings_total', 0),
+            'all_reviews': reviews,
+            'bad_reviews': bad_reviews,
+            'bad_reviewers': [review.get('author_name', 'Anonymous') for review in bad_reviews]
+        }, None
+        
+    except Exception as e:
+        return None, f"Error searching business: {str(e)}"
 
 def get_base_html(title, content):
     """Generate base HTML with CSS for any page"""
@@ -223,35 +276,67 @@ def search_reviews():
             '''
             return get_base_html("Configuration Error", error_content)
         
-        # For now, show a success message with demo data
+        # Search for the actual business and get real reviews
+        business_data, error = search_business_and_reviews(business_name, location)
+        
+        if error:
+            error_content = f'''
+            <div class="header">
+                <h1>❌ Search Error</h1>
+                <p>Could not find business or reviews</p>
+            </div>
+            <div class="results-section">
+                <div class="error">{error}</div>
+                <a href="/" class="back-btn">← Try Another Search</a>
+            </div>
+            '''
+            return get_base_html("Search Error", error_content)
+        
+        # Generate results with real data
+        bad_reviews_html = ""
+        if business_data['bad_reviews']:
+            for review in business_data['bad_reviews']:
+                reviewer_name = review.get('author_name', 'Anonymous')
+                rating = review.get('rating', 'N/A')
+                text = review.get('text', 'No review text available')
+                time = review.get('time', 'Unknown date')
+                
+                bad_reviews_html += f'''
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+                    <h4>👤 {reviewer_name}</h4>
+                    <p><strong>Rating:</strong> {rating} stars</p>
+                    <p><strong>Review:</strong> {text[:200]}{'...' if len(text) > 200 else ''}</p>
+                    <p><strong>Date:</strong> {time}</p>
+                </div>
+                '''
+        else:
+            bad_reviews_html = '<p style="color: #28a745; font-weight: bold;">🎉 No bad reviews found! This business has good ratings.</p>'
+        
         success_content = f'''
         <div class="header">
-            <h1>✅ Search Successful!</h1>
-            <p>Found reviews for "{business_name}" in "{location}"</p>
+            <h1>✅ Search Results</h1>
+            <p>Found reviews for "{business_data['place_name']}"</p>
         </div>
         
         <div class="results-section">
             <div class="success-box">
-                <div class="success-title">🎉 Google Review Analyzer is Working!</div>
-                <p>Your app is successfully deployed on Railway!</p>
-                <p>API Key Status: ✅ Configured</p>
-                <p>Business: {business_name}</p>
-                <p>Location: {location}</p>
+                <div class="success-title">🏢 Business Information</div>
+                <p><strong>Name:</strong> {business_data['place_name']}</p>
+                <p><strong>Address:</strong> {business_data['place_address']}</p>
+                <p><strong>Overall Rating:</strong> {business_data['total_rating']} stars</p>
+                <p><strong>Total Reviews:</strong> {business_data['total_reviews']}</p>
             </div>
             
             <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h3>📊 Demo Results:</h3>
-                <p><strong>Total Reviews Found:</strong> 5</p>
-                <p><strong>Bad Reviews (< 4 stars):</strong> 2</p>
-                <p><strong>Suspicious Reviewers:</strong> 1</p>
+                <h3>📊 Review Analysis:</h3>
+                <p><strong>Total Reviews Found:</strong> {len(business_data['all_reviews'])}</p>
+                <p><strong>Bad Reviews (< 4 stars):</strong> {len(business_data['bad_reviews'])}</p>
+                <p><strong>Bad Reviewers:</strong> {len(business_data['bad_reviewers'])}</p>
             </div>
             
             <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h3>👤 Sample Bad Reviewer:</h3>
-                <p><strong>Name:</strong> MORI N.</p>
-                <p><strong>Rating:</strong> 3 stars</p>
-                <p><strong>Review:</strong> "Visiting Coquitlam decided to pick up a couple of grocery items..."</p>
-                <p><strong>Analysis:</strong> This reviewer tends to give lower ratings (60% of reviews are below 4 stars)</p>
+                <h3>👥 Bad Reviews ({len(business_data['bad_reviews'])} found):</h3>
+                {bad_reviews_html}
             </div>
             
             <a href="/" class="back-btn">← Search Another Business</a>
