@@ -1,0 +1,16 @@
+SUSPICIOUS YELP REVIEWERS REPORT
+==================================================
+
+Business ID: demo_restaurant_c
+Analysis Date: 2025-10-20 15:16:39
+Total Reviews: 3
+Low Rating Reviews: 1
+Suspicious Users Found: 1
+
+User: Grumpy Reviewer (ID: user2)
+  Total Reviews: 5
+  Low Rating Percentage: 100.0%
+  Average Rating: 1.6
+  Rating for Target Business: 2 stars
+  Comment: Poor service at Demo Restaurant C...
+

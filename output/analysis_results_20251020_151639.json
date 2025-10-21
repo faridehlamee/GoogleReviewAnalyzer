@@ -1,0 +1,66 @@
+{
+  "business_id": "demo_restaurant_c",
+  "total_reviews": 3,
+  "low_rating_reviews": 1,
+  "suspicious_users_count": 1,
+  "user_analysis": {
+    "user2": {
+      "name": "Grumpy Reviewer",
+      "total_reviews": 5,
+      "low_rating_count": 5,
+      "low_rating_percentage": 1.0,
+      "average_rating": 1.6,
+      "all_ratings": [
+        2,
+        1,
+        2,
+        1,
+        2
+      ],
+      "is_suspicious": true,
+      "target_business_rating": 2,
+      "target_business_comment": "Poor service at Demo Restaurant C"
+    }
+  },
+  "suspicious_users": [
+    "user2"
+  ],
+  "all_reviews": [
+    {
+      "rating": 5,
+      "text": "Great food at Demo Restaurant C!",
+      "user": {
+        "id": "user1",
+        "name": "Happy Customer"
+      },
+      "time_created": "2023-01-15T10:00:00Z",
+      "reviewer_id": "user1",
+      "reviewer_name": "Happy Customer",
+      "reviewer_image_url": ""
+    },
+    {
+      "rating": 2,
+      "text": "Poor service at Demo Restaurant C",
+      "user": {
+        "id": "user2",
+        "name": "Grumpy Reviewer"
+      },
+      "time_created": "2023-01-14T15:30:00Z",
+      "reviewer_id": "user2",
+      "reviewer_name": "Grumpy Reviewer",
+      "reviewer_image_url": ""
+    },
+    {
+      "rating": 4,
+      "text": "Good experience at Demo Restaurant C",
+      "user": {
+        "id": "user3",
+        "name": "Satisfied Customer"
+      },
+      "time_created": "2023-01-13T20:15:00Z",
+      "reviewer_id": "user3",
+      "reviewer_name": "Satisfied Customer",
+      "reviewer_image_url": ""
+    }
+  ]
+}

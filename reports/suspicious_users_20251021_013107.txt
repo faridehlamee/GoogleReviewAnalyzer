@@ -1,0 +1,16 @@
+SUSPICIOUS GOOGLE PLACES REVIEWERS REPORT
+==================================================
+
+Place ID: ChIJG5HNyTN_hlQRyl76hCnaqxY
+Analysis Date: 2025-10-21 01:31:07
+Total Reviews: 5
+Low Rating Reviews: 1
+Suspicious Users Found: 1
+
+User: MORI N. (ID: MORI N.)
+  Total Reviews: 14
+  Low Rating Percentage: 100.0%
+  Average Rating: 2.2
+  Rating for Target Business: 3 stars
+  Comment: Visiting Coquitlam decided to pick up a couple of grocery items, and needed to lunch before heading ...
+

@@ -1,0 +1,100 @@
+{
+  "place_id": "ChIJG5HNyTN_hlQRyl76hCnaqxY",
+  "total_reviews": 5,
+  "low_rating_reviews": 1,
+  "suspicious_users_count": 0,
+  "user_analysis": {
+    "MORI N.": {
+      "name": "MORI N.",
+      "total_reviews": 12,
+      "low_rating_count": 5,
+      "low_rating_percentage": 0.4166666666666667,
+      "average_rating": 3.3333333333333335,
+      "all_ratings": [
+        1,
+        5,
+        4,
+        3,
+        3,
+        1,
+        1,
+        5,
+        4,
+        4,
+        5,
+        4
+      ],
+      "is_suspicious": false,
+      "target_business_rating": 3,
+      "target_business_comment": "Visiting Coquitlam decided to pick up a couple of grocery items, and needed to lunch before heading back to Vancouver.\n\nOoohhhh….an attached restaurant!\nPerfect!\n\nThis place has a good vibe, friendly staff…from the cashier to the bakery, to the deli counter ending at the restaurant section…we received warm attentive service.\n\nLove their fresh meat section and their ground lamb was wonderful.\nTheir grocery deli section is decent but could have more variety.\n\nWe tried their cream puff and coconut rollette ….it didn’t taste fresh. It didn’t taste as if it had been freshly baked that day.\nPerhaps had been previously prepared and refrigerated. The pastry had collected moisture instead of it being flakey and crisp, which indicates pre-refrigeration.\nI guess my standards for a bakery are quite high. Fresh baked goods daily.\n\nThe restaurant.\nEven though the portion size and quality needs improvement….I have to be fair and acknowledge their affordable and reasonable menu pricing. You get what you pay for.\n\nYup. That pretty much sums it up."
+    }
+  },
+  "suspicious_users": [],
+  "all_reviews": [
+    {
+      "rating": 4,
+      "text": "Friendly environment, great foods and coffee.  Can’t wait to try the dessert next time.\nFood prices are very reasonable.",
+      "user": {
+        "id": "Khale",
+        "name": "Khale"
+      },
+      "time_created": 1748830537,
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWAsz2qecc4jjnh1Xb1Pw3nJKXy9I9GuFqqJfiHWDhOsB5tb0Wv=s128-c0x00000000-cc-rp-mo-ba3",
+      "reviewer_id": "Khale",
+      "reviewer_name": "Khale",
+      "reviewer_image_url": ""
+    },
+    {
+      "rating": 5,
+      "text": "This restaurant is a hidden gem inside the grocery store. The dishes are delicious and affordable. Additionally, they are bigger than Cazba’s. Moreover, there are desserts and bakery foods especially fresh barbari, I like. Highly recommended!",
+      "user": {
+        "id": "M T",
+        "name": "M T"
+      },
+      "time_created": 1745125525,
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKDZHf9z7wV-qOBXt1v_-FHUuWNSLz4Eicetc2o0TaHtyObxw=s128-c0x00000000-cc-rp-mo-ba5",
+      "reviewer_id": "M T",
+      "reviewer_name": "M T",
+      "reviewer_image_url": ""
+    },
+    {
+      "rating": 5,
+      "text": "We ordered our wedding cake from this bakery, and we couldn't have been happier with the result! The cake looked exactly like the photo we shared with them and it was incredibly delicious and fresh.",
+      "user": {
+        "id": "bano ordibehesht",
+        "name": "bano ordibehesht"
+      },
+      "time_created": 1755301140,
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJZvJySZzQjfc_yipqfe00CMWrJI2vLf2tl7-eHU4jv0nqxAw=s128-c0x00000000-cc-rp-mo",
+      "reviewer_id": "bano ordibehesht",
+      "reviewer_name": "bano ordibehesht",
+      "reviewer_image_url": ""
+    },
+    {
+      "rating": 4,
+      "text": "I had just finished my doctor's appointments and was on my way to catch the train when I was suddenly drawn in by the enticing aroma of freshly baked pastries. I knew I had to try one, although some of the flavors were too sweet for my taste. Still, it was a refreshing discovery that I couldn't resist. I'll definitely stop by again on my next appointment and sample some new pastries. The pastry chef even offered a complimentary bread tasting, fresh from the oven, which was absolutely delicious.",
+      "user": {
+        "id": "joy ojediran",
+        "name": "joy ojediran"
+      },
+      "time_created": 1744094590,
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUkzSu0WfX4nuzToQE_obaHxt9uXyeWqnQZp5o75DZNqRW-PXEU=s128-c0x00000000-cc-rp-mo",
+      "reviewer_id": "joy ojediran",
+      "reviewer_name": "joy ojediran",
+      "reviewer_image_url": ""
+    },
+    {
+      "rating": 3,
+      "text": "Visiting Coquitlam decided to pick up a couple of grocery items, and needed to lunch before heading back to Vancouver.\n\nOoohhhh….an attached restaurant!\nPerfect!\n\nThis place has a good vibe, friendly staff…from the cashier to the bakery, to the deli counter ending at the restaurant section…we received warm attentive service.\n\nLove their fresh meat section and their ground lamb was wonderful.\nTheir grocery deli section is decent but could have more variety.\n\nWe tried their cream puff and coconut rollette ….it didn’t taste fresh. It didn’t taste as if it had been freshly baked that day.\nPerhaps had been previously prepared and refrigerated. The pastry had collected moisture instead of it being flakey and crisp, which indicates pre-refrigeration.\nI guess my standards for a bakery are quite high. Fresh baked goods daily.\n\nThe restaurant.\nEven though the portion size and quality needs improvement….I have to be fair and acknowledge their affordable and reasonable menu pricing. You get what you pay for.\n\nYup. That pretty much sums it up.",
+      "user": {
+        "id": "MORI N.",
+        "name": "MORI N."
+      },
+      "time_created": 1738038088,
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXmh-25mC5oA1PFMMA_52ysg1xmB302WDBqAM9LeMqrXCsb_9pPTA=s128-c0x00000000-cc-rp-mo-ba6",
+      "reviewer_id": "MORI N.",
+      "reviewer_name": "MORI N.",
+      "reviewer_image_url": ""
+    }
+  ]
+}

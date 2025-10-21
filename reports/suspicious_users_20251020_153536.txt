@@ -1,0 +1,23 @@
+SUSPICIOUS GOOGLE PLACES REVIEWERS REPORT
+==================================================
+
+Place ID: test_place_id
+Analysis Date: 2025-10-20 15:35:36
+Total Reviews: 5
+Low Rating Reviews: 3
+Suspicious Users Found: 2
+
+User: Disappointed Customer (ID: user3)
+  Total Reviews: 6
+  Low Rating Percentage: 100.0%
+  Average Rating: 1.5
+  Rating for Target Business: 2 stars
+  Comment: Poor service, food was cold...
+
+User: Angry Customer (ID: user4)
+  Total Reviews: 8
+  Low Rating Percentage: 100.0%
+  Average Rating: 1.2
+  Rating for Target Business: 1 stars
+  Comment: Terrible experience, avoid this place...
+
