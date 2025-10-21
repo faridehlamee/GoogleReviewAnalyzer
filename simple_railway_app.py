@@ -282,6 +282,11 @@ def health_check():
         "api_key_configured": bool(os.environ.get('GOOGLE_API_KEY'))
     })
 
+@app.route('/ping')
+def ping():
+    """Simple ping endpoint for Railway health checks"""
+    return "pong", 200
+
 if __name__ == '__main__':
     print("🚂 Starting Google Review Analyzer on Railway...")
     
@@ -296,5 +301,11 @@ if __name__ == '__main__':
     # Get port from Railway
     port = os.environ.get('PORT', '5008')
     print(f"🌐 Starting server on port {port}")
+    print(f"🔍 Health check endpoint: http://0.0.0.0:{port}/ping")
+    print(f"🏠 Main page: http://0.0.0.0:{port}/")
     
-    app.run(host='0.0.0.0', port=int(port), debug=False)
+    try:
+        app.run(host='0.0.0.0', port=int(port), debug=False)
+    except Exception as e:
+        print(f"❌ Failed to start server: {e}")
+        raise
