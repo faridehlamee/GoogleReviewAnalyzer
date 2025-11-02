@@ -357,6 +357,149 @@ def get_base_html(title, content):
                 font-weight: 600;
                 display: inline-block;
             }}
+            
+            .table-wrapper {{
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin-top: 20px;
+            }}
+            
+            .leads-card {{
+                display: none;
+            }}
+            
+            @media (max-width: 768px) {{
+                body {{
+                    padding: 10px;
+                }}
+                
+                .container {{
+                    border-radius: 10px;
+                }}
+                
+                .header {{
+                    padding: 20px 15px;
+                }}
+                
+                .header h1 {{
+                    font-size: 1.8em;
+                }}
+                
+                .form-section {{
+                    padding: 20px 15px;
+                }}
+                
+                .results-section {{
+                    padding: 20px 15px;
+                }}
+                
+                .form-group input {{
+                    font-size: 16px;
+                    padding: 12px;
+                }}
+                
+                .leads-table {{
+                    display: none;
+                }}
+                
+                .leads-card {{
+                    display: block;
+                }}
+                
+                .lead-card {{
+                    background: white;
+                    border-radius: 10px;
+                    padding: 15px;
+                    margin-bottom: 15px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                }}
+                
+                .lead-card-header {{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #e1e5e9;
+                }}
+                
+                .lead-card-title {{
+                    font-size: 1.2em;
+                    font-weight: 600;
+                    color: #333;
+                    flex: 1;
+                }}
+                
+                .lead-card-number {{
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 600;
+                    margin-right: 10px;
+                }}
+                
+                .lead-card-row {{
+                    display: flex;
+                    margin-bottom: 10px;
+                    padding: 8px 0;
+                    border-bottom: 1px solid #f0f0f0;
+                }}
+                
+                .lead-card-label {{
+                    font-weight: 600;
+                    color: #667eea;
+                    min-width: 80px;
+                    margin-right: 10px;
+                }}
+                
+                .lead-card-value {{
+                    flex: 1;
+                    word-break: break-word;
+                }}
+                
+                .lead-card-value a {{
+                    color: #667eea;
+                    text-decoration: none;
+                }}
+                
+                .lead-card-value a:hover {{
+                    text-decoration: underline;
+                }}
+                
+                .tabs {{
+                    flex-direction: column;
+                }}
+                
+                .tab {{
+                    width: 100%;
+                    margin-bottom: 2px;
+                }}
+            }}
+            
+            @media (max-width: 480px) {{
+                .header h1 {{
+                    font-size: 1.5em;
+                }}
+                
+                .header p {{
+                    font-size: 1em;
+                }}
+                
+                .lead-card-title {{
+                    font-size: 1.1em;
+                }}
+                
+                .lead-card-label {{
+                    min-width: 70px;
+                    font-size: 0.9em;
+                }}
+            }}
         </style>
     </head>
     <body>
@@ -611,10 +754,13 @@ def lead_finder():
             '''
             return get_base_html("Search Error", error_content)
         
-        # Generate leads table
+        # Generate leads table and mobile cards
         leads_table_html = ""
+        leads_cards_html = ""
         if leads:
+            # Desktop table view
             leads_table_html = '''
+            <div class="table-wrapper">
             <table class="leads-table">
                 <thead>
                     <tr>
@@ -630,6 +776,9 @@ def lead_finder():
                 <tbody>
             '''
             
+            # Mobile card view
+            leads_cards_html = '<div class="leads-card">'
+            
             for idx, lead in enumerate(leads, 1):
                 # Format rating badge
                 rating_html = '<span class="rating-badge">★ ' + str(lead['rating']) + '</span>' if isinstance(lead['rating'], (int, float)) else 'N/A'
@@ -637,6 +786,7 @@ def lead_finder():
                 # Format website link
                 website_html = f"<a href='{lead['website']}' target='_blank'>Visit Website</a>" if lead['website'] != 'No website' else 'No website'
                 
+                # Desktop table row
                 leads_table_html += f'''
                 <tr>
                     <td>{idx}</td>
@@ -648,13 +798,45 @@ def lead_finder():
                     <td>{lead['total_reviews']}</td>
                 </tr>
                 '''
+                
+                # Mobile card
+                leads_cards_html += f'''
+                <div class="lead-card">
+                    <div class="lead-card-header">
+                        <div style="display: flex; align-items: center; flex: 1;">
+                            <div class="lead-card-number">{idx}</div>
+                            <div class="lead-card-title">{lead['name']}</div>
+                        </div>
+                        <div>{rating_html}</div>
+                    </div>
+                    <div class="lead-card-row">
+                        <div class="lead-card-label">📍 Address:</div>
+                        <div class="lead-card-value">{lead['address']}</div>
+                    </div>
+                    <div class="lead-card-row">
+                        <div class="lead-card-label">📞 Phone:</div>
+                        <div class="lead-card-value">{lead['phone']}</div>
+                    </div>
+                    <div class="lead-card-row">
+                        <div class="lead-card-label">🌐 Website:</div>
+                        <div class="lead-card-value">{website_html}</div>
+                    </div>
+                    <div class="lead-card-row">
+                        <div class="lead-card-label">⭐ Reviews:</div>
+                        <div class="lead-card-value">{lead['total_reviews']}</div>
+                    </div>
+                </div>
+                '''
             
             leads_table_html += '''
                 </tbody>
             </table>
+            </div>
             '''
+            leads_cards_html += '</div>'
         else:
             leads_table_html = '<p style="color: #28a745; font-weight: bold;">🎉 No leads found for your search criteria.</p>'
+            leads_cards_html = '<p style="color: #28a745; font-weight: bold;">🎉 No leads found for your search criteria.</p>'
         
         success_content = f'''
         <div class="header">
@@ -671,6 +853,7 @@ def lead_finder():
             </div>
             
             {leads_table_html}
+            {leads_cards_html}
             
             <a href="/" class="back-btn">← Search for More Leads</a>
         </div>
